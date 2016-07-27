@@ -1,0 +1,8 @@
+/* Login form */
+.panel-default {
+    opacity: 0.9;
+    margin-top:80px;
+}
+.form-group.last {
+    margin-bottom:0px;
+}
