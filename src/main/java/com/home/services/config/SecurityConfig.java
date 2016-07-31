@@ -24,11 +24,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private CustomUserDetailsService userDetailsService;
+    private UserDetailsService userDetailsService;
 
 
     @Autowired
-    public void setUserDetailsService(CustomUserDetailsService userDetailsService) {
+    public void setUserDetailsService(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 
