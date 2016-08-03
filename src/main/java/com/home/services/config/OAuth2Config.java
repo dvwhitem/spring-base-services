@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
+import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
 import javax.sql.DataSource;
@@ -79,7 +80,7 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
                 .redirectUris("http://anywhere?key=value").and()
                 .withClient("my-client-with-secret")
                 .authorizedGrantTypes("client_credentials", "password")
-                .authorities("ROLE_CLIENT").scopes("read")
+                .authorities("ROLE_CLIENT", "ROLE_ADMIN").scopes("read", "write")
                 .resourceIds("oauth2-resource").secret("secret");
     }
 }
