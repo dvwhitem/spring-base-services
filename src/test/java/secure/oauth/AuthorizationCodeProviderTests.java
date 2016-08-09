@@ -5,6 +5,7 @@ import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -45,7 +46,7 @@ public class AuthorizationCodeProviderTests {
         providerTokenServices.setTokenStore(new InMemoryTokenStore());
     }
 
-    @Value("${local.server.port}")
+    @LocalServerPort
     private int port;
 
     private AuthenticationManager authenticationManager = Mockito.mock(AuthenticationManager.class);
