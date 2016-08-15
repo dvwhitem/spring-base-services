@@ -3,8 +3,10 @@ package com.home.services.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.security.Principal;
+
 
 /**
  * Created by vitaliy on 7/25/16.
@@ -22,5 +24,11 @@ public class IndexController {
     @ResponseBody
     public String hello() {
         return "Hello World!";
+    }
+
+    @RequestMapping(value = "/user")
+    @ResponseBody
+    public String user(Principal principal) {
+        return "Secured Hello " + principal.getName();
     }
 }

@@ -29,10 +29,11 @@ public class ResourceServer extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http
                 .requestMatchers()
-                .antMatchers("/", "/hello")
+                .antMatchers("/", "/hello", "/user")
                 .and()
                 .authorizeRequests()
                 .antMatchers("/hello").hasRole("ADMIN")
+                .antMatchers("/user").hasRole("USER")
                 .anyRequest().authenticated();
     }
 }

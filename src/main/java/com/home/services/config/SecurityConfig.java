@@ -31,7 +31,7 @@ import org.springframework.web.filter.DelegatingFilterProxy;
  * Created by vitaliy on 7/26/16.
  */
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
