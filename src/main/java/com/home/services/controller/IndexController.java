@@ -1,5 +1,6 @@
 package com.home.services.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ public class IndexController {
 
     @RequestMapping(value = "/hello")
     @ResponseBody
+    @PreAuthorize("#oauth2.hasScope('read')")
     public String hello() {
         return "Hello World!";
     }
