@@ -7,6 +7,6 @@ addons:
   postgresql: "9.4"
 
 before_script:
-     - psql -c "CREATE USER spring_services WITH password '12345'; -U postgres
      - psql -c 'CREATE DATABASE spring_services OWNER spring_services;' -U postgres
+          - psql -c "CREATE USER spring_services WITH password '12345';" -U postgres
      - psql -f _schema.sql -U spring_services
