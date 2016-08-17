@@ -23,6 +23,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         System.out.println("GET USER: " + email);
         User user = userService.getUserByEmail(email).orElseThrow(()
                 -> new UsernameNotFoundException(String.format("User with email= %s was not found", email)));
+        CurrentUser u =  new CurrentUser(user);
+        System.out.println("GET USER 2: " + u.getUser());
         return new CurrentUser(user);
     }
 }

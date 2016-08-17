@@ -73,7 +73,7 @@ public class SecureTests {
         AuthenticationManager authenticationManager = this.context
                 .getBean(AuthenticationManager.class);
         this.authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken("demo@localhost", "demo"));
+                new UsernamePasswordAuthenticationToken("demo@localhost", "$2a$10$ebyC4Z5WtCXXc.HGDc1Yoe6CLFzcntFmfse6/pTj7CeDY5I05w16C"));
     }
 
     @After
