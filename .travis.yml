@@ -8,7 +8,7 @@ before_script:
      - psql -c 'CREATE DATABASE spring_services OWNER spring_services;' -U postgres
      - psql -f src/main/resources/_schema.sql -U spring_services
      - psql -f src/main/resources/_data.sql -U spring_services
-     - psql -c 'SELECT * FROM users;' -U postgres
+     - psql -c 'SELECT * FROM oauth_client_details;' -U postgres
 
 services:
  - postgresql
