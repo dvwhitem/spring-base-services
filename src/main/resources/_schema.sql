@@ -48,3 +48,59 @@ create table oauth_approvals (
   expiresAt TIMESTAMP,
   lastModifiedAt TIMESTAMP
 );
+
+-------------------------------------------------------
+
+
+CREATE TABLE "public"."roles"
+(
+   id int PRIMARY KEY NOT NULL,
+   name varchar(255)
+)
+;
+CREATE TABLE "public"."user_roles"
+(
+   role_id int NOT NULL,
+   user_id bigint NOT NULL,
+   CONSTRAINT user_roles_pkey PRIMARY KEY (role_id,user_id)
+)
+;
+CREATE TABLE "public"."users"
+(
+   id bigint PRIMARY KEY NOT NULL,
+   email varchar(255) NOT NULL,
+   password varchar(255) NOT NULL
+)
+;
+CREATE UNIQUE INDEX roles_pkey ON "public"."roles"(id)
+;
+ALTER TABLE "public"."user_roles"
+ADD CONSTRAINT fkh8ciramu9cc9q3qcqiv4ue8a6
+FOREIGN KEY (role_id)
+REFERENCES "public"."roles"(id)
+;
+ALTER TABLE "public"."user_roles"
+ADD CONSTRAINT fkhfh9dx7w3ubf1co1vdev94g3f
+FOREIGN KEY (user_id)
+REFERENCES "public"."users"(id)
+;
+ALTER TABLE "public"."user_roles"
+ADD CONSTRAINT fk_g1uebn6mqk9qiaw45vnacmyo2
+FOREIGN KEY (user_id)
+REFERENCES "public"."users"(id)
+;
+ALTER TABLE "public"."user_roles"
+ADD CONSTRAINT fk_5q4rc4fh1on6567qk69uesvyf
+FOREIGN KEY (role_id)
+REFERENCES "public"."roles"(id)
+;
+CREATE UNIQUE INDEX user_roles_pkey ON "public"."user_roles"
+(
+  role_id,
+  user_id
+)
+;
+CREATE UNIQUE INDEX uk_g1uebn6mqk9qiaw45vnacmyo2 ON "public"."user_roles"(user_id)
+;
+CREATE UNIQUE INDEX users_pkey ON "public"."users"(id)
+;
