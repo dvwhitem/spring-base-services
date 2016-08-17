@@ -35,7 +35,7 @@ public class ClientCredentialsProviderTests {
     @LocalServerPort
     private int port;
 
-    @Test
+    //@Test
     public void testGetPageHelloClientCredentials() throws Exception {
         ClientCredentialsResourceDetails details = new ClientCredentialsResourceDetails();
         details.setClientId("my-client-with-secret");
