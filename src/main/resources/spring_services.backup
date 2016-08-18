@@ -1,0 +1,393 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: oauth_access_token; Type: TABLE; Schema: public; Owner: spring_services; Tablespace: 
+--
+
+CREATE TABLE oauth_access_token (
+    token_id character varying(256),
+    token bytea,
+    authentication_id character varying(256),
+    user_name character varying(256),
+    client_id character varying(256),
+    authentication bytea,
+    refresh_token character varying(256)
+);
+
+
+ALTER TABLE oauth_access_token OWNER TO spring_services;
+
+--
+-- Name: oauth_approvals; Type: TABLE; Schema: public; Owner: spring_services; Tablespace: 
+--
+
+CREATE TABLE oauth_approvals (
+    userid character varying(256),
+    clientid character varying(256),
+    scope character varying(256),
+    status character varying(10),
+    expiresat timestamp without time zone,
+    lastmodifiedat timestamp without time zone
+);
+
+
+ALTER TABLE oauth_approvals OWNER TO spring_services;
+
+--
+-- Name: oauth_client_details; Type: TABLE; Schema: public; Owner: spring_services; Tablespace: 
+--
+
+CREATE TABLE oauth_client_details (
+    client_id character varying(256) NOT NULL,
+    resource_ids character varying(256),
+    client_secret character varying(256),
+    scope character varying(256),
+    authorized_grant_types character varying(256),
+    web_server_redirect_uri character varying(256),
+    authorities character varying(256),
+    access_token_validity integer,
+    refresh_token_validity integer,
+    additional_information character varying(4096),
+    autoapprove character varying(256)
+);
+
+
+ALTER TABLE oauth_client_details OWNER TO spring_services;
+
+--
+-- Name: oauth_client_token; Type: TABLE; Schema: public; Owner: spring_services; Tablespace: 
+--
+
+CREATE TABLE oauth_client_token (
+    token_id character varying(256),
+    token bytea,
+    authentication_id character varying(256),
+    user_name character varying(256),
+    client_id character varying(256)
+);
+
+
+ALTER TABLE oauth_client_token OWNER TO spring_services;
+
+--
+-- Name: oauth_code; Type: TABLE; Schema: public; Owner: spring_services; Tablespace: 
+--
+
+CREATE TABLE oauth_code (
+    code character varying(256),
+    authentication bytea
+);
+
+
+ALTER TABLE oauth_code OWNER TO spring_services;
+
+--
+-- Name: oauth_refresh_token; Type: TABLE; Schema: public; Owner: spring_services; Tablespace: 
+--
+
+CREATE TABLE oauth_refresh_token (
+    token_id character varying(256),
+    token bytea,
+    authentication bytea
+);
+
+
+ALTER TABLE oauth_refresh_token OWNER TO spring_services;
+
+--
+-- Name: roles; Type: TABLE; Schema: public; Owner: spring_services; Tablespace: 
+--
+
+CREATE TABLE roles (
+    id integer NOT NULL,
+    name character varying(255)
+);
+
+
+ALTER TABLE roles OWNER TO spring_services;
+
+--
+-- Name: roles_id_seq; Type: SEQUENCE; Schema: public; Owner: spring_services
+--
+
+CREATE SEQUENCE roles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE roles_id_seq OWNER TO spring_services;
+
+--
+-- Name: roles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: spring_services
+--
+
+ALTER SEQUENCE roles_id_seq OWNED BY roles.id;
+
+
+--
+-- Name: user_roles; Type: TABLE; Schema: public; Owner: spring_services; Tablespace: 
+--
+
+CREATE TABLE user_roles (
+    role_id integer NOT NULL,
+    user_id bigint NOT NULL
+);
+
+
+ALTER TABLE user_roles OWNER TO spring_services;
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: spring_services; Tablespace: 
+--
+
+CREATE TABLE users (
+    id bigint NOT NULL,
+    email character varying(255) NOT NULL,
+    password character varying(255) NOT NULL
+);
+
+
+ALTER TABLE users OWNER TO spring_services;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: spring_services
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE users_id_seq OWNER TO spring_services;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: spring_services
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: spring_services
+--
+
+ALTER TABLE ONLY roles ALTER COLUMN id SET DEFAULT nextval('roles_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: spring_services
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Data for Name: oauth_access_token; Type: TABLE DATA; Schema: public; Owner: spring_services
+--
+
+COPY oauth_access_token (token_id, token, authentication_id, user_name, client_id, authentication, refresh_token) FROM stdin;
+\.
+
+
+--
+-- Data for Name: oauth_approvals; Type: TABLE DATA; Schema: public; Owner: spring_services
+--
+
+COPY oauth_approvals (userid, clientid, scope, status, expiresat, lastmodifiedat) FROM stdin;
+\.
+
+
+--
+-- Data for Name: oauth_client_details; Type: TABLE DATA; Schema: public; Owner: spring_services
+--
+
+COPY oauth_client_details (client_id, resource_ids, client_secret, scope, authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, refresh_token_validity, additional_information, autoapprove) FROM stdin;
+\.
+
+
+--
+-- Data for Name: oauth_client_token; Type: TABLE DATA; Schema: public; Owner: spring_services
+--
+
+COPY oauth_client_token (token_id, token, authentication_id, user_name, client_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: oauth_code; Type: TABLE DATA; Schema: public; Owner: spring_services
+--
+
+COPY oauth_code (code, authentication) FROM stdin;
+\.
+
+
+--
+-- Data for Name: oauth_refresh_token; Type: TABLE DATA; Schema: public; Owner: spring_services
+--
+
+COPY oauth_refresh_token (token_id, token, authentication) FROM stdin;
+\.
+
+
+--
+-- Data for Name: roles; Type: TABLE DATA; Schema: public; Owner: spring_services
+--
+
+COPY roles (id, name) FROM stdin;
+1	ROLE_ADMIN
+\.
+
+
+--
+-- Name: roles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: spring_services
+--
+
+SELECT pg_catalog.setval('roles_id_seq', 1, true);
+
+
+--
+-- Data for Name: user_roles; Type: TABLE DATA; Schema: public; Owner: spring_services
+--
+
+COPY user_roles (role_id, user_id) FROM stdin;
+1	1
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: spring_services
+--
+
+COPY users (id, email, password) FROM stdin;
+1	demo@localhost	$2a$10$ebyC4Z5WtCXXc.HGDc1Yoe6CLFzcntFmfse6/pTj7CeDY5I05w16C
+\.
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: spring_services
+--
+
+SELECT pg_catalog.setval('users_id_seq', 1, true);
+
+
+--
+-- Name: oauth_client_details_pkey; Type: CONSTRAINT; Schema: public; Owner: spring_services; Tablespace: 
+--
+
+ALTER TABLE ONLY oauth_client_details
+    ADD CONSTRAINT oauth_client_details_pkey PRIMARY KEY (client_id);
+
+
+--
+-- Name: roles_pkey; Type: CONSTRAINT; Schema: public; Owner: spring_services; Tablespace: 
+--
+
+ALTER TABLE ONLY roles
+    ADD CONSTRAINT roles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: uk_g1uebn6mqk9qiaw45vnacmyo2; Type: CONSTRAINT; Schema: public; Owner: spring_services; Tablespace: 
+--
+
+ALTER TABLE ONLY user_roles
+    ADD CONSTRAINT uk_g1uebn6mqk9qiaw45vnacmyo2 UNIQUE (user_id);
+
+
+--
+-- Name: user_roles_pkey; Type: CONSTRAINT; Schema: public; Owner: spring_services; Tablespace: 
+--
+
+ALTER TABLE ONLY user_roles
+    ADD CONSTRAINT user_roles_pkey PRIMARY KEY (role_id, user_id);
+
+
+--
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: spring_services; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: fk_5q4rc4fh1on6567qk69uesvyf; Type: FK CONSTRAINT; Schema: public; Owner: spring_services
+--
+
+ALTER TABLE ONLY user_roles
+    ADD CONSTRAINT fk_5q4rc4fh1on6567qk69uesvyf FOREIGN KEY (role_id) REFERENCES roles(id);
+
+
+--
+-- Name: fk_g1uebn6mqk9qiaw45vnacmyo2; Type: FK CONSTRAINT; Schema: public; Owner: spring_services
+--
+
+ALTER TABLE ONLY user_roles
+    ADD CONSTRAINT fk_g1uebn6mqk9qiaw45vnacmyo2 FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- Name: fkh8ciramu9cc9q3qcqiv4ue8a6; Type: FK CONSTRAINT; Schema: public; Owner: spring_services
+--
+
+ALTER TABLE ONLY user_roles
+    ADD CONSTRAINT fkh8ciramu9cc9q3qcqiv4ue8a6 FOREIGN KEY (role_id) REFERENCES roles(id);
+
+
+--
+-- Name: fkhfh9dx7w3ubf1co1vdev94g3f; Type: FK CONSTRAINT; Schema: public; Owner: spring_services
+--
+
+ALTER TABLE ONLY user_roles
+    ADD CONSTRAINT fkhfh9dx7w3ubf1co1vdev94g3f FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
