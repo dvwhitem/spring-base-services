@@ -44,6 +44,7 @@ public class ClientCredentialsProviderTests {
         details.setScope(Arrays.asList("read", "write"));
 
         OAuth2RestTemplate rest = new OAuth2RestTemplate(details);
+        System.out.println("TOKEN  : " + rest.getAccessToken());
         ResponseEntity<String> response = rest.getForEntity("http://localhost:" + this.port + "/hello", String.class);
         Assert.assertEquals("Hello World!", response.getBody());
     }
