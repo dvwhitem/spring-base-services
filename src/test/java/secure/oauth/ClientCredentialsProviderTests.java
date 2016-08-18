@@ -43,6 +43,7 @@ public class ClientCredentialsProviderTests {
         details.setAccessTokenUri("http://localhost:" + this.port + "/oauth/token");
         details.setScope(Arrays.asList("read", "write"));
 
+        System.out.println("REST  : " + details.getAccessTokenUri());
         OAuth2RestTemplate rest = new OAuth2RestTemplate(details);
         System.out.println("TOKEN  : " + rest.getAccessToken());
         ResponseEntity<String> response = rest.getForEntity("http://localhost:" + this.port + "/hello", String.class);
