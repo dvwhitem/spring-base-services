@@ -7,6 +7,7 @@ before_script:
      - psql -c "CREATE USER spring_services WITH PASSWORD '12345';" -U postgres
      - psql -c "ALTER USER spring_services  WITH SUPERUSER;" -U postgres
      - psql -c 'CREATE DATABASE spring_services OWNER spring_services;' -U postgres
+     - psql -c 'GRANT ALL PRIVILEGES ON DATABASE spring_services to spring_services;' -U postgres 
    #  - psql -f src/main/resources/_schema.sql -U spring_services
    #  - psql -f src/main/resources/_data.sql -U spring_services
      - psql -q -d spring_services < src/main/resources/_schema.sql -U spring_services
