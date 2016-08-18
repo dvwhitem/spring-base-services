@@ -10,10 +10,6 @@ before_script:
      - psql -c 'CREATE DATABASE spring_services OWNER spring_services;' -U postgres
      - psql -c 'GRANT ALL PRIVILEGES ON DATABASE spring_services to spring_services;' -U postgres
      - psql -d spring_services < src/main/resources/spring_services.backup -U spring_services
-   #  - psql -f src/main/resources/_schema.sql -U spring_services
-   #  - psql -f src/main/resources/_data.sql -U spring_services
-   #  - psql  -d spring_services < src/main/resources/_schema.sql -U spring_services
-   #  - psql  -d spring_services < src/main/resources/_data.sql -U spring_services
 services:
  - postgresql
 
