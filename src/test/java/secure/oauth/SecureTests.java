@@ -100,22 +100,4 @@ public class SecureTests {
         mockMvc.perform(MockMvcRequestBuilders.get("/hello"))
                 .andExpect(MockMvcResultMatchers.status().isUnauthorized());
     }
-
-    @Test
-    public void testFailGetUserPageClientCredentials() throws Exception {
-        ClientCredentialsResourceDetails details = new ClientCredentialsResourceDetails();
-        details.setClientId("my-client-with-secret");
-        details.setClientSecret("secret");
-        details.setAccessTokenUri("http://localhost:" + this.port + "/oauth/token");
-
-        OAuth2RestTemplate rest = new OAuth2RestTemplate(details);
-        try {
-            rest.getForEntity("http://localhost:" + this.port + "/user", String.class);
-            Assert.fail("Access Denied");
-        } catch (Exception e) {
-            Assert.assertEquals(e.getMessage(), "Access is denied");
-        }
-
-    }
-
 }
